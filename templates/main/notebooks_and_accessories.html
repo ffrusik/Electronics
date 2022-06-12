@@ -1,0 +1,37 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %}Ноутбуки и аксессуары{% endblock %}
+
+{% block content %}
+
+    {% include 'main/sidebar.html' %}
+
+    <div class="select">
+        <form>
+            <p><select class="form-select border-lightgreen sort">
+                <option selected>Сортировка</option>
+                <option>От дешевых к дорогим</option>
+                <option>От дорогих к дешевым</option>
+                <option>От А до Я</option>
+            </select></p>
+        </form>
+    </div>
+    <main>
+        <ul class="nav nav-pills mb-auto items">
+
+            {% for el in items %}
+                <li class="nav-item item lightgreen-line">
+                    <a href=""><img src="{% static 'main/img/heart_not_active.png' %}" alt="Избраное" class="item-favorite"></a>
+                    <a class="item-link" href="{% url 'items_detail' el.id %}">
+                        <div class="item-img-div"><img src="{{ el.photo1.url }}" class="item-img"></div>
+                        <p class="item-name px-4">{{ el.name_cut }}</p>
+                        <p class="item-price px-4">{{ el.price }}</p>
+                    </a>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </main>
+{% endblock %}

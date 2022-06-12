@@ -1,0 +1,29 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %}Оформление заказа -> {{ name_of_item }}{% endblock %}
+
+{% block content %}
+    <div class="order">
+        <h2 class="mb-4 order-name">Оформление заказа: {{ name_of_item }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div hidden>{{ form.id_of_item }}</div>
+            <div hidden>{{ form.name_of_item }}</div>
+            <div hidden>{{ form.category }}</div>
+            <div hidden>{{ form.price }}</div>
+            {{ form.surname }}
+            {{ form.name }}
+            {{ form.patronymic }}
+            {{ form.phone }}
+            {{ form.city }}
+            {{ form.post_office }}
+            <span>{{ error }}</span>
+            <h3 class="text-lightgreen">Оплата после получения товара (наложенным платежом)</h3>
+            <h3 class="text-lightgreen">{{ price_of_item }}₴</h3>
+            <button class="btn btn-success" type="submit">Заказать!</button>
+            <br><p></p>
+        </form>
+    </div>
+{% endblock %}

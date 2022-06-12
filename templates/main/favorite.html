@@ -1,0 +1,42 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block sort %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% include 'main/sidebar.html' %}
+
+    <main>
+        {% if products is None %}
+            <h1>У вас нет избранных товаров</h1>
+        {% elif cookie == "" %}
+            <h1>У вас нет избранных товаров</h1>
+        {% else %}
+
+        <div class="cart-title">
+            <h1>Избранное</h1>
+        </div>
+
+            <ul class="nav nav-pills mb-auto items">
+            {% for el in products %}
+                <li class="nav-item item-cart">
+                    <a href="{% url 'trash_favorite' %}?id={{el.id}}"><img src="{% static 'main/img/trash.svg' %}" alt="Удалить элемент" class="item-favorite"></a>
+                    <a class="item-link" href="{% url 'buy' el.id %}?id={{el.id}}">
+                        <div class="item-img-div"><img src="{{ el.photo1.url }}" class="item-img"></div>
+                        <p class="item-name px-4">{{ el.name_cut }}</p>
+                        <p class="item-price px-4">{{ el.price }}</p>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul><br>
+
+        {% endif %}
+    </main>
+
+{% endblock %}

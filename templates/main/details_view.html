@@ -1,0 +1,34 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+    <div class="preview">
+        <h1>{{ item.name }}</h1>
+
+        {% if item.photo1.url != null %}
+           <div class="item-img-div-preview"><img src="{{ item.photo1.url }}" class="item-img-preview"></div>
+        {% endif %}
+        {% if item.photo2.url != null %}
+            <br><div class="item-img-div-preview"><img src="{{ item.photo2.url }}" class="item-img-preview"></div>
+        {% endif %}
+        {% if item.photo3.url != null %}
+            <br><div class="item-img-div-preview"><img src="{{ item.photo3.url }}" class="item-img-preview"></div>
+        {% endif %}
+        {% if item.photo4.url != null %}
+            <br><div class="item-img-div-preview"><img src="{{ item.photo4.url }}" class="item-img-preview"></div>
+        {% endif %}
+        {% if item.photo5.url != null %}
+            <br><div class="item-img-div-preview"><img src="{{ item.photo5.url }}" class="item-img-preview"></div>
+        {% endif %}
+
+        <p class="description">{{ item.description }}</p><br>
+        <p class="price">{{ item.price }}</p><br>
+
+        <a href="{% url 'order' %}?id={{item.id}}"><button class="btn btn-success buy">В корзину</button></a><br>
+        <a href="{% url 'buy' item.id %}?id={{item.id}}"><button class="btn btn-success buy mt-2">Заказать</button></a>
+
+    </div>
+{% endblock %}
